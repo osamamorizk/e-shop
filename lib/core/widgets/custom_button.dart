@@ -14,14 +14,16 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50,
-        width: 300,
+        height: 60,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16), color: Colors.black),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.black,
+        ),
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(fontSize: 18, color: Colors.white),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
           ),
         ),
       ),

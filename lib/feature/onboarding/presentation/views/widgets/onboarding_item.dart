@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/feature/onboarding/data/models/on_boarding_model.dart';
-import 'package:shop_app/feature/onboarding/presentation/widgets/custom_stack.dart';
+import 'package:shop_app/feature/onboarding/presentation/views/widgets/custom_stack.dart';
 
 class CustomOnboardingItem extends StatelessWidget {
   const CustomOnboardingItem({

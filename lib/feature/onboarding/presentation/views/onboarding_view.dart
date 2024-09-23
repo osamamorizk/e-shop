@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/cashe_hlper.dart';
 import 'package:shop_app/feature/onboarding/onboard_consts.dart';
-import 'package:shop_app/feature/onboarding/presentation/widgets/custom_button.dart';
-import 'package:shop_app/feature/onboarding/presentation/widgets/custom_indicator.dart';
-import 'package:shop_app/feature/onboarding/presentation/widgets/onboarding_item.dart';
+import 'package:shop_app/feature/onboarding/presentation/views/widgets/custom_onboarding_button.dart';
+import 'package:shop_app/feature/onboarding/presentation/views/widgets/custom_indicator.dart';
+import 'package:shop_app/feature/onboarding/presentation/views/widgets/onboarding_item.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -27,7 +27,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         actions: [
           TextButton(
               onPressed: () async {
-                GoRouter.of(context).go(Routes.homeView);
+                GoRouter.of(context).go(Routes.loginView);
                 await CasheHlper.saveData(key: 'onboarding', value: true);
               },
               child: const Text(
@@ -66,11 +66,11 @@ class _OnboardingViewState extends State<OnboardingView> {
                 },
               ),
             ),
-            CustomButton(
+            CustomOnboardButton(
               onTap: () async {
                 if (isLast) {
                   await CasheHlper.saveData(key: 'onboarding', value: true);
-                  GoRouter.of(context).go(Routes.homeView);
+                  GoRouter.of(context).go(Routes.loginView);
                 } else {
                   pageController.nextPage(
                       duration: const Duration(milliseconds: 500),

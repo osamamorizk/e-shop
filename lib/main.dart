@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/core/Routing/app_router.dart';
 import 'package:shop_app/core/helpers/cashe_hlper.dart';
 import 'package:shop_app/core/helpers/consts.dart';
-import 'package:shop_app/feature/onboarding/presentation/views/onboarding_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
