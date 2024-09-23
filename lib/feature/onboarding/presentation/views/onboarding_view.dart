@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shop_app/core/Routing/routes.dart';
+import 'package:shop_app/core/helpers/cashe_hlper.dart';
 import 'package:shop_app/feature/onboarding/onboard_consts.dart';
 import 'package:shop_app/feature/onboarding/presentation/widgets/custom_button.dart';
 import 'package:shop_app/feature/onboarding/presentation/widgets/custom_indicator.dart';
@@ -23,7 +26,10 @@ class _OnboardingViewState extends State<OnboardingView> {
         title: Image.asset('assets/images/quickmart.png'),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                GoRouter.of(context).go(Routes.homeView);
+                await CasheHlper.saveData(key: 'onboarding', value: true);
+              },
               child: const Text(
                 'Skip',
                 style: TextStyle(
@@ -61,10 +67,15 @@ class _OnboardingViewState extends State<OnboardingView> {
               ),
             ),
             CustomButton(
-              onTap: () {
-                pageController.nextPage(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeOutCubic);
+              onTap: () async {
+                if (isLast) {
+                  await CasheHlper.saveData(key: 'onboarding', value: true);
+                  GoRouter.of(context).go(Routes.homeView);
+                } else {
+                  pageController.nextPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOutCubic);
+                }
               },
               text: isLast ? 'Get Started' : 'Next',
             ),
