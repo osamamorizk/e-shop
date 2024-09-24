@@ -67,6 +67,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             CustomTextField(
               validator: (value) {
                 if (value!.isEmpty) return 'Feild required';
+                return null;
               },
               controller: emailController,
               hintText: 'Enter your Email',
@@ -82,6 +83,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             CustomTextField(
               validator: (value) {
                 if (value!.isEmpty) return 'Feild required';
+                return null;
               },
               obscureText: isVisable,
               controller: passwordController,
@@ -110,6 +112,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               validator: (value) {
                 if (value!.isEmpty) return 'Feild required';
                 if (value != passwordController.text) return 'Not matched';
+                return null;
               },
               obscureText: isVisable,
               hintText: 'Enter password again',
