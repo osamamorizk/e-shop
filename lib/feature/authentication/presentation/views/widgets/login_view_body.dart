@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -103,16 +104,22 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 }
               },
               builder: (context, state) {
-                return CustomButton(
-                  text: 'Login',
-                  onTap: () async {
-                    if (formKey.currentState!.validate()) {
-                      BlocProvider.of<LoginCubit>(context).login(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      );
-                    }
-                  },
+                return ConditionalBuilder(
+                  condition: state is! LoginLoading,
+                  builder: (context) => CustomButton(
+                    text: 'Login',
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<LoginCubit>(context).login(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                      }
+                    },
+                  ),
+                  fallback: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

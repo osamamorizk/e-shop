@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -148,17 +149,23 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 }
               },
               builder: (context, state) {
-                return CustomButton(
-                  text: 'Create Account',
-                  onTap: () async {
-                    if (formKey.currentState!.validate()) {
-                      BlocProvider.of<RegisterCubit>(context)
-                          .registerWithEmailPass(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      );
-                    }
-                  },
+                return ConditionalBuilder(
+                  condition: state is! RegisterLoading,
+                  builder: (context) => CustomButton(
+                    text: 'Create Account',
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<RegisterCubit>(context)
+                            .registerWithEmailPass(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                      }
+                    },
+                  ),
+                  fallback: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

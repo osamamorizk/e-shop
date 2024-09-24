@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/consts.dart';
-import 'package:shop_app/feature/home/presentation/views/home_view.dart';
+import 'package:shop_app/core/widgets/bottom_bar.dart';
 import 'package:shop_app/feature/authentication/presentation/views/login_view.dart';
 import 'package:shop_app/feature/onboarding/presentation/views/onboarding_view.dart';
 import 'package:shop_app/feature/authentication/presentation/views/register_view.dart';
@@ -22,7 +22,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.homeView,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const BottomBar(),
       ),
       GoRoute(
         path: Routes.loginView,
