@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DontHaveAccount extends StatelessWidget {
-  const DontHaveAccount({super.key});
-
+  const DontHaveAccount({super.key, this.onPressed});
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -15,7 +15,7 @@ class DontHaveAccount extends StatelessWidget {
         TextButton(
           style: const ButtonStyle(
               padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-          onPressed: () {},
+          onPressed: onPressed,
           child: const Text(
             'Signup',
             style: TextStyle(fontSize: 18),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginWithGoogle extends StatelessWidget {
-  const LoginWithGoogle({super.key, this.onTap});
+class AuthWithGoogle extends StatelessWidget {
+  const AuthWithGoogle({super.key, this.onTap, required this.text});
   final void Function()? onTap;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,17 +16,17 @@ class LoginWithGoogle extends StatelessWidget {
           border: Border.all(width: .2),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login with google',
-              style: TextStyle(fontSize: 20, color: Colors.black),
+              text,
+              style: const TextStyle(fontSize: 20, color: Colors.black),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
-            Icon(
+            const Icon(
               FontAwesomeIcons.google,
               color: Colors.pink,
             )

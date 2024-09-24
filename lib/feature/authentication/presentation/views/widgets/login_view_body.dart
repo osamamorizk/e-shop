@@ -5,11 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/styles.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
-import 'package:shop_app/feature/login/presentation/manger/login_cubit/login_cubit.dart';
-import 'package:shop_app/feature/login/presentation/views/widgets/custom_text_form.dart';
-import 'package:shop_app/feature/login/presentation/views/widgets/dont_have_account.dart';
-import 'package:shop_app/feature/login/presentation/views/widgets/login_with_google.dart';
-import 'package:shop_app/feature/login/presentation/views/widgets/or_widget.dart';
+import 'package:shop_app/feature/authentication/presentation/manger/login_cubit/login_cubit.dart';
+import 'package:shop_app/core/widgets/custom_text_form.dart';
+import 'package:shop_app/feature/authentication/presentation/views/widgets/dont_have_account.dart';
+import 'package:shop_app/feature/authentication/presentation/views/widgets/auth_google.dart';
+import 'package:shop_app/feature/authentication/presentation/views/widgets/or_widget.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -82,7 +82,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
-                  GoRouter.of(context).go(Routes.homeView);
+                  GoRouter.of(context).push(Routes.homeView);
                   Fluttertoast.showToast(
                       msg: "Login Successfuly",
                       toastLength: Toast.LENGTH_SHORT,
@@ -119,9 +119,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             const SizedBox(height: 15),
             const OrWidget(),
             const SizedBox(height: 15),
-            const LoginWithGoogle(),
+            const AuthWithGoogle(
+              text: 'Login with google',
+            ),
             const SizedBox(height: 15),
-            const DontHaveAccount(),
+            DontHaveAccount(
+              onPressed: () {
+                GoRouter.of(context).push(Routes.registerView);
+              },
+            ),
           ],
         ),
       ),
