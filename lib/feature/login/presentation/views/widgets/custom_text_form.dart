@@ -24,7 +24,12 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       obscureText: obscureText,
       controller: controller,
-      validator: validator,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Feild required';
+        } else
+          return null;
+      },
       keyboardType: keyboardType,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(18),

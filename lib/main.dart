@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/core/Routing/app_router.dart';
 import 'package:shop_app/core/helpers/cashe_hlper.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   WidgetsFlutterBinding.ensureInitialized();
   await CasheHlper.casheIntialization();
   onboard = CasheHlper.getData(key: 'onboarding') ?? false;
