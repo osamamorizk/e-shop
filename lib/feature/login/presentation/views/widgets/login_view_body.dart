@@ -82,6 +82,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
+                  GoRouter.of(context).go(Routes.homeView);
                   Fluttertoast.showToast(
                       msg: "Login Successfuly",
                       toastLength: Toast.LENGTH_SHORT,
@@ -90,7 +91,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       backgroundColor: Colors.green,
                       textColor: Colors.white,
                       fontSize: 16.0);
-                  GoRouter.of(context).go(Routes.homeView);
                 } else if (state is LoginFailure) {
                   Fluttertoast.showToast(
                       msg: state.errorMessage,
