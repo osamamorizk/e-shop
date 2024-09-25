@@ -79,7 +79,9 @@ class SkeletonizerCategoryProduct extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    decoration: BoxDecoration(color: Colors.grey[100]),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.grey[300]),
                     height: 150,
                     width: 165,
                   ),

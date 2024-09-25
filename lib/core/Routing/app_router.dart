@@ -4,6 +4,7 @@ import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/core/widgets/bottom_bar.dart';
 import 'package:shop_app/feature/authentication/presentation/views/login_view.dart';
+import 'package:shop_app/feature/home/presentation/views/product_details_view.dart';
 import 'package:shop_app/feature/onboarding/presentation/views/onboarding_view.dart';
 import 'package:shop_app/feature/authentication/presentation/views/register_view.dart';
 
@@ -32,15 +33,10 @@ class AppRouter {
         path: Routes.registerView,
         builder: (context, state) => const RegisterView(),
       ),
+      GoRoute(
+        path: Routes.productDetailsView,
+        builder: (context, state) => const ProductDetailsView(),
+      ),
     ],
-    // redirect: (context, state) {
-    //   if (!onboard) {
-    //     return Routes.onbarding;
-    //   } else if (auth.currentUser != null) {
-    //     return Routes.homeView;
-    //   } else {
-    //     return Routes.loginView;
-    //   }
-    // },
   );
 }
