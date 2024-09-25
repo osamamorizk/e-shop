@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shop_app/core/helpers/consts.dart';
 
 class ProductCatItem extends StatelessWidget {
   const ProductCatItem({super.key});
@@ -24,7 +25,7 @@ class ProductCatItem extends StatelessWidget {
           right: 10,
           bottom: 2,
           child: CircleAvatar(
-              backgroundColor: Colors.grey[100],
+              backgroundColor: kPrimaryColor.withOpacity(.07),
               child: IconButton(
                   onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart))),
         )
@@ -62,6 +63,7 @@ class CategryProductDetails extends StatelessWidget {
                 maxLines: 2,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
+              SizedBox(height: 5),
               Text(
                 r'$ 1,290',
                 style: TextStyle(

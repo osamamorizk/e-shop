@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shop_app/core/helpers/consts.dart';
 
 class LatestProductItem extends StatelessWidget {
   const LatestProductItem({super.key});
@@ -43,8 +44,11 @@ class LatestProductItem extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-                onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart))
+            CircleAvatar(
+              backgroundColor: kPrimaryColor.withOpacity(.07),
+              child: IconButton(
+                  onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart)),
+            )
           ],
         ),
       ),

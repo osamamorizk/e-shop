@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/core/Routing/app_router.dart';
 import 'package:shop_app/core/helpers/cashe_hlper.dart';
 import 'package:shop_app/core/helpers/consts.dart';
+import 'package:shop_app/core/helpers/service_locator.dart';
 
 void main() async {
+  setupGetIt();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
