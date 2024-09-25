@@ -48,8 +48,9 @@ class CategryProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 5),
         SizedBox(
-          width: 145,
+          width: 150,
           height: 155,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
