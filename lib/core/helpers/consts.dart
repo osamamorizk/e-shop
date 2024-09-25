@@ -4,6 +4,7 @@ import 'package:shop_app/feature/cart/presentation/views/cart_view.dart';
 import 'package:shop_app/feature/favorite/presentation/views/favorite_view.dart';
 import 'package:shop_app/feature/home/presentation/views/home_view.dart';
 
+Color kPrimaryColor = Color(0xff21D4B4);
 bool onboard = false;
 
 List<BottomNavigationBarItem> bottomBarItems = const [

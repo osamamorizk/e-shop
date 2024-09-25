@@ -8,6 +8,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Image.asset(height: 42, 'assets/images/quickmart1.5.png'),
         actions: const [
@@ -21,7 +22,7 @@ class HomeView extends StatelessWidget {
           )
         ],
       ),
-      body: const HomeViewBody(),
+      body: HomeViewBody(),
     );
   }
 }
