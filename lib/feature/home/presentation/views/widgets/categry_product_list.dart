@@ -9,7 +9,7 @@ class CategryProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240,
+      height: 245,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 4,
