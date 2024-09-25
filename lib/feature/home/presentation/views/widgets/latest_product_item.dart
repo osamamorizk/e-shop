@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/core/helpers/consts.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class LatestProductItem extends StatelessWidget {
-  const LatestProductItem({super.key});
-
+  const LatestProductItem({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,25 +20,27 @@ class LatestProductItem extends StatelessWidget {
           children: [
             SizedBox(
               height: 110,
+              width: 100,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.asset('assets/images/test.jpg')),
+                  child: Image.network(productModel.image)),
             ),
-            const SizedBox(
+            SizedBox(
               width: 180,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+                    productModel.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    r'$ 1,290',
-                    style: TextStyle(
+                    r'$' '${productModel.price}',
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   )

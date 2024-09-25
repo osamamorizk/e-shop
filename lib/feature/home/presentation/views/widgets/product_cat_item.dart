@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/core/helpers/consts.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class ProductCatItem extends StatelessWidget {
-  const ProductCatItem({super.key});
-
+  const ProductCatItem({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,9 +17,11 @@ class ProductCatItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             color: Colors.white,
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: CategryProductDetails(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: CategryProductDetails(
+              productModel: productModel,
+            ),
           ),
         ),
         Positioned(
@@ -37,8 +40,10 @@ class ProductCatItem extends StatelessWidget {
 class CategryProductDetails extends StatelessWidget {
   const CategryProductDetails({
     super.key,
+    required this.productModel,
   });
 
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,24 +54,25 @@ class CategryProductDetails extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-            child: Image.asset(fit: BoxFit.fill, 'assets/images/test.jpg'),
+            child: Image.network(fit: BoxFit.fill, productModel.image),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+                productModel.title,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
-                r'$ 1,290',
-                style: TextStyle(
+                r'$ ' '${productModel.price}',
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               )

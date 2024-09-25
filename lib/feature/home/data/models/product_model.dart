@@ -5,7 +5,7 @@ class ProductModel {
   final String description;
   final String category;
   final String image;
-  final int rate;
+  final num rate;
 
   ProductModel(
       {required this.title,

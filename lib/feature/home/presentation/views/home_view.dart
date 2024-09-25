@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/core/helpers/service_locator.dart';
 import 'package:shop_app/feature/home/data/repos/home_repo_impl.dart';
-import 'package:shop_app/feature/home/presentation/manger/home_cubit/home_cubit.dart';
+import 'package:shop_app/feature/home/presentation/manger/all_products/all_product_cubit.dart';
+import 'package:shop_app/feature/home/presentation/manger/category_cubit/category_cubit.dart';
+import 'package:shop_app/feature/home/presentation/manger/category_product/category_product_cubit_cubit.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,8 +13,22 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(getIt.get<HomeRepoImpl>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AllProductCubit>(
+          create: (BuildContext context) =>
+              AllProductCubit(getIt.get<HomeRepoImpl>())..featchAllProducts(),
+        ),
+        BlocProvider<CategoryCubit>(
+          create: (BuildContext context) =>
+              CategoryCubit(getIt.get<HomeRepoImpl>())..featchCategory(),
+        ),
+        BlocProvider<CategoryProductCubit>(
+          create: (BuildContext context) =>
+              CategoryProductCubit(getIt.get<HomeRepoImpl>())
+                ..featchCatProducts(categryName: 'electronics'),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
