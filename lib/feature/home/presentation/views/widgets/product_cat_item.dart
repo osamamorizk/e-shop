@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 
@@ -8,31 +10,38 @@ class ProductCatItem extends StatelessWidget {
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: 170,
-          decoration: BoxDecoration(
-            border: Border.all(width: .1),
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: CategryProductDetails(
-              productModel: productModel,
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context)
+            .push(Routes.productDetailsView, extra: productModel);
+      },
+      child: Stack(
+        children: [
+          Container(
+            width: 170,
+            decoration: BoxDecoration(
+              border: Border.all(width: .1),
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: CategryProductDetails(
+                productModel: productModel,
+              ),
             ),
           ),
-        ),
-        Positioned(
-          right: 10,
-          bottom: 2,
-          child: CircleAvatar(
-              backgroundColor: kPrimaryColor.withOpacity(.07),
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart))),
-        )
-      ],
+          Positioned(
+            right: 10,
+            bottom: 2,
+            child: CircleAvatar(
+                backgroundColor: kPrimaryColor.withOpacity(.07),
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(FontAwesomeIcons.heart))),
+          )
+        ],
+      ),
     );
   }
 }

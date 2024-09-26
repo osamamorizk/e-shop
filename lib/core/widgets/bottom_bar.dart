@@ -37,9 +37,10 @@ class _BottomBarState extends State<BottomBar> {
       child: Scaffold(
         bottomNavigationBar: Container(
           height: 65,
-          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 1),
+          margin: const EdgeInsets.only(bottom: 0),
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16)),
             child: Theme(
               data: ThemeData(
                 splashColor: Colors.transparent,
