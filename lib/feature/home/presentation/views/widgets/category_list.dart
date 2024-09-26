@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_cubit/category_cubit.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_product/category_product_cubit_cubit.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/category_item.dart';
+import 'package:shop_app/feature/home/presentation/views/widgets/skeletonizer_category.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CategoryList extends StatefulWidget {
@@ -55,44 +56,6 @@ class _CategoryListState extends State<CategoryList> {
           return const SkeletonizerCategory();
         }
       },
-    );
-  }
-}
-
-class SkeletonizerCategory extends StatelessWidget {
-  const SkeletonizerCategory({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Skeletonizer(
-      enabled: true,
-      child: SizedBox(
-        height: 40,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Container(
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Center(
-                      child: Text(
-                    'Category    Name',
-                    maxLines: 2,
-                  ))),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
+import 'package:shop_app/feature/home/presentation/views/widgets/category_product_name_price.dart';
 
 class ProductCatItem extends StatelessWidget {
   const ProductCatItem({super.key, required this.productModel});
@@ -26,7 +27,7 @@ class ProductCatItem extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: CategryProductDetails(
+              child: CategryProductNamePrice(
                 productModel: productModel,
               ),
             ),
@@ -42,54 +43,6 @@ class ProductCatItem extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class CategryProductDetails extends StatelessWidget {
-  const CategryProductDetails({
-    super.key,
-    required this.productModel,
-  });
-
-  final ProductModel productModel;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 5),
-        SizedBox(
-          width: 150,
-          height: 155,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-            child: Image.network(fit: BoxFit.fill, productModel.image),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                productModel.title,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                r'$ ' '${productModel.price}',
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              )
-            ],
-          ),
-        )
-      ],
     );
   }
 }
