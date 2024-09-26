@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
           )
         ],
       ),
-      body: HomeViewBody(),
+      body: const HomeViewBody(),
     );
   }
 }

@@ -13,9 +13,7 @@ class PriceAndCount extends StatelessWidget {
       children: [
         Text(
           r'$' '400',
-          style: TextStyle(
-            fontSize: 18,
-          ),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         CartCount()
       ],

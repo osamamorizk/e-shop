@@ -8,28 +8,31 @@ class TitleAndDelet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const SizedBox(
-          width: 140,
-          child: Text(
-            "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(
+            width: 140,
+            child: Text(
+              "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
           ),
-        ),
-        CircleAvatar(
-          backgroundColor: kPrimaryColor.withOpacity(.07),
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.red,
-              )),
-        ),
-      ],
+          CircleAvatar(
+            backgroundColor: kPrimaryColor.withOpacity(.07),
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                )),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/core/helpers/service_locator.dart';
+import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
+import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/home/data/repos/home_repo_impl.dart';
 import 'package:shop_app/feature/home/presentation/manger/all_products/all_product_cubit.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_cubit/category_cubit.dart';
@@ -32,6 +34,9 @@ class _BottomBarState extends State<BottomBar> {
           create: (BuildContext context) =>
               CategoryProductCubit(getIt.get<HomeRepoImpl>())
                 ..featchCatProducts(categryName: 'electronics'),
+        ),
+        BlocProvider<CartCubit>(
+          create: (BuildContext context) => CartCubit(CartRepoImpl()),
         ),
       ],
       child: Scaffold(

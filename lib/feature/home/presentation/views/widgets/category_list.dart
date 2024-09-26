@@ -4,7 +4,6 @@ import 'package:shop_app/feature/home/presentation/manger/category_cubit/categor
 import 'package:shop_app/feature/home/presentation/manger/category_product/category_product_cubit_cubit.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/category_item.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/skeletonizer_category.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});

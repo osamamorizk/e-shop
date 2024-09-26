@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/feature/home/presentation/manger/all_products/all_product_cubit.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/latest_product_item.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/skeletonizer_latest_product.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class LatestProductList extends StatelessWidget {
   const LatestProductList({

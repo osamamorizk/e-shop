@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/count_button.dart';
 
-class CartCount extends StatelessWidget {
+class CartCount extends StatefulWidget {
   const CartCount({super.key});
 
+  @override
+  State<CartCount> createState() => _CartCountState();
+}
+
+class _CartCountState extends State<CartCount> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          const CountButton(
+          CountButton(
+            onPressed: () {
+              if (count > 0) {
+                count--;
+              }
+              setState(() {});
+            },
             icon: Icons.remove,
           ),
           Container(
@@ -19,13 +31,17 @@ class CartCount extends StatelessWidget {
             ),
             height: 35,
             width: 35,
-            child: const Center(
+            child: Center(
                 child: Text(
-              '5',
-              style: TextStyle(fontSize: 20),
+              '$count',
+              style: const TextStyle(fontSize: 20),
             )),
           ),
-          const CountButton(
+          CountButton(
+            onPressed: () {
+              setState(() {});
+              count++;
+            },
             icon: Icons.add,
           ),
         ],

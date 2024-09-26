@@ -9,13 +9,14 @@ class CartView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         title: const Text(
           'Cart',
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
       ),
-      body: CartBody(),
+      body: const CartBody(),
     );
   }
 }

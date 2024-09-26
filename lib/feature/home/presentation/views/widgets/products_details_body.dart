@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/price_and_add_to_cart.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_image_stack.dart';
@@ -37,8 +42,32 @@ class ProductDetailsBody extends StatelessWidget {
             ),
             const Divider(),
             const SizedBox(height: 15),
-            PriceANdAddCart(
-              productModel: productModel,
+            BlocListener<CartCubit, CartState>(
+              listener: (context, state) {
+                if (state is CartAddSuccess) {
+                  Fluttertoast.showToast(
+                      msg: "Successfuly Add",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              },
+              child: PriceANdAddCart(
+                onTap: () async {
+                  log('tapped');
+                  await BlocProvider.of<CartCubit>(context).addProductCart(
+                      title: productModel.title,
+                      description: productModel.description,
+                      rate: productModel.rate,
+                      image: productModel.image,
+                      price: productModel.price,
+                      id: productModel.id);
+                },
+                productModel: productModel,
+              ),
             ),
             const SizedBox(height: 10),
           ],
