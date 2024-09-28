@@ -102,31 +102,24 @@ class CartRepoImpl implements CartRepo {
     }
   }
 
-//   @override
-//   Future<Either<Failure, List<String>>> getProductIds() async {
-//     if (user != null) {
-//       try {
-//         String uid = user!.uid;
-//           var productsDocs =
-//              FirebaseFirestore.instance
-//                 .collection('users')
-//                 .doc(uid)
-//                 .collection('products')
-//                 .id;
+  @override
+  Future<Either<Failure, void>> deletCartProduct(
+      {required int productId}) async {
+    {
+      String uid = user!.uid;
+      final productRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('products')
+          .doc(productId.toString());
 
-//         List<String> productsIds = [];
-
-//         // for (var product in productsDocs.docs) {
-//         //   productsIds.add(product.id);
-//         // }
-// log(message)
-//         return right(productsIds);
-//       } catch (e) {
-//         log(e.toString());
-//         return left(Failure(errorMessage: e.toString()));
-//       }
-//     } else {
-//       return left(Failure(errorMessage: 'No user loged'));
-//     }
-//   }
+      try {
+        await productRef.delete();
+        return right(null);
+      } catch (e) {
+        Text(e.toString());
+        return left(Failure(errorMessage: e.toString()));
+      }
+    }
+  }
 }

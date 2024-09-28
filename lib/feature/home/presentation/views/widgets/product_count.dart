@@ -13,7 +13,7 @@ class ProductCount extends StatefulWidget {
 }
 
 class _ProductCountState extends State<ProductCount> {
-  int count = 0;
+  int count = 1;
   @override
   @override
   Widget build(BuildContext context) {

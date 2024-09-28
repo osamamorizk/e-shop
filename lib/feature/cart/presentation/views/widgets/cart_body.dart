@@ -10,7 +10,7 @@ class CartBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cartCubit = BlocProvider.of<CartCubit>(context);
-    cartCubit.getCartProducts();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,7 +44,7 @@ class CartBody extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        OrderInfo(
+        const OrderInfo(
           info: r'$' '${500} ',
           title: 'Total price',
         ),

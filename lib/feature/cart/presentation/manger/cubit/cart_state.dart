@@ -45,3 +45,13 @@ final class GetIdSuccess extends CartState {
   final List<String> products;
   GetIdSuccess({required this.products});
 }
+
+//final class GetIdLoading extends CartState {}
+
+final class DeleteFailure extends CartState {
+  final String errorMessage;
+
+  DeleteFailure({required this.errorMessage});
+}
+
+final class DeleteSuccess extends CartState {}

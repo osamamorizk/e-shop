@@ -14,7 +14,7 @@ abstract class CartRepo {
     required int count,
   });
   Future<Either<Failure, List<CartProductModel>>> getCart();
-  // Future<Either<Failure, List<String>>> getProductIds();
+  Future<Either<Failure, void>> deletCartProduct({required int productId});
 
   Future<void> updateProduct({
     required int count,

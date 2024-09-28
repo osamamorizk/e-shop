@@ -36,6 +36,7 @@ class CartProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TitleAndDelet(
+                    cartProductModel: cartProductModel,
                     title: cartProductModel.title,
                   ),
                   PriceAndCount(

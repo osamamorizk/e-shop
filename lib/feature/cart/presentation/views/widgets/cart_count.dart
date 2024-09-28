@@ -32,22 +32,19 @@ class _CartCountState extends State<CartCount> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SizedBox(
-            width: 150,
+            width: 120,
             child: Row(
               children: [
                 CountButton(
                   onPressed: () async {
-                    if (count > 0) {
+                    if (count > 1) {
                       count--;
-
+                      setState(() {});
                       await BlocProvider.of<CartCubit>(context)
                           .updateCartProducts(
                               count: count,
                               productId: widget.cartProductModel.id);
-                      await BlocProvider.of<CartCubit>(context)
-                          .getCartProducts();
                     }
-                    setState(() {});
                   },
                   icon: Icons.remove,
                 ),
@@ -71,7 +68,6 @@ class _CartCountState extends State<CartCount> {
                         .updateCartProducts(
                             count: count,
                             productId: widget.cartProductModel.id);
-                    await BlocProvider.of<CartCubit>(context).getCartProducts();
                   },
                   icon: Icons.add,
                 ),
