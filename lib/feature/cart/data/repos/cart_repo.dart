@@ -11,6 +11,13 @@ abstract class CartRepo {
     required num price,
     required int id,
     required String category,
+    required int count,
   });
   Future<Either<Failure, List<CartProductModel>>> getCart();
+  // Future<Either<Failure, List<String>>> getProductIds();
+
+  Future<void> updateProduct({
+    required int count,
+    required int productId,
+  });
 }

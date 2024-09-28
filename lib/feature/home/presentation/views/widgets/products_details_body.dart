@@ -1,11 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/views/widgets/cart_body.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
-import 'package:shop_app/feature/home/presentation/views/widgets/price_and_add_to_cart.dart';
+import 'package:shop_app/feature/home/presentation/views/widgets/add_to_cart_button.dart';
+import 'package:shop_app/feature/home/presentation/views/widgets/product_count.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_image_stack.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_rate.dart';
 
@@ -41,6 +41,7 @@ class ProductDetailsBody extends StatelessWidget {
               ),
             ),
             const Divider(),
+            OrderInfo(title: 'Price', info: r'$ ' '${productModel.price}'),
             const SizedBox(height: 15),
             BlocListener<CartCubit, CartState>(
               listener: (context, state) {
@@ -65,25 +66,50 @@ class ProductDetailsBody extends StatelessWidget {
                       fontSize: 16.0);
                 }
               },
-              child: PriceANdAddCart(
-                onTap: () async {
-                  log('tapped');
-                  await BlocProvider.of<CartCubit>(context).addProductCart(
-                      title: productModel.title,
-                      description: productModel.description,
-                      rate: productModel.rate,
-                      image: productModel.image,
-                      price: productModel.price,
-                      id: productModel.id,
-                      category: productModel.category);
-                },
-                productModel: productModel,
-              ),
+              child: AddCartAndCount(productModel: productModel),
             ),
             const SizedBox(height: 10),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AddCartAndCount extends StatelessWidget {
+  const AddCartAndCount({
+    super.key,
+    required this.productModel,
+  });
+
+  final ProductModel productModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        const SizedBox(
+          height: 60,
+          width: 170,
+          child: ProductCount(),
+        ),
+        AddCartButton(
+          onTap: () async {
+            await BlocProvider.of<CartCubit>(context).addProductCart(
+              title: productModel.title,
+              description: productModel.description,
+              rate: productModel.rate,
+              image: productModel.image,
+              price: productModel.price,
+              id: productModel.id,
+              category: productModel.category,
+              count: BlocProvider.of<CartCubit>(context).cartCount,
+            );
+          },
+          productModel: productModel,
+        ),
+      ],
     );
   }
 }

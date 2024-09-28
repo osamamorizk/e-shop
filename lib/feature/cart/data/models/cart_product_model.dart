@@ -5,6 +5,7 @@ class CartProductModel {
   final String description;
   final String category;
   final String image;
+  int count;
 
   CartProductModel({
     required this.title,
@@ -13,6 +14,7 @@ class CartProductModel {
     required this.description,
     required this.category,
     required this.image,
+    required this.count,
   });
 
   factory CartProductModel.fromJson(json) {
@@ -23,6 +25,7 @@ class CartProductModel {
       description: json['description'],
       category: json['category'],
       image: json['image'],
+      count: json['count'],
     );
   }
 }

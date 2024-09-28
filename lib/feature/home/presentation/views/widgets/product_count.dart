@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/count_button.dart';
 
-class CartCount extends StatefulWidget {
-  const CartCount({
+class ProductCount extends StatefulWidget {
+  const ProductCount({
     super.key,
-    required this.count,
-    required this.cartProductModel,
   });
-  final int count;
-  final CartProductModel cartProductModel;
 
   @override
-  State<CartCount> createState() => _CartCountState();
+  State<ProductCount> createState() => _ProductCountState();
 }
 
-class _CartCountState extends State<CartCount> {
-  late int count;
+class _ProductCountState extends State<ProductCount> {
+  int count = 0;
   @override
-  void initState() {
-    count = widget.count;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
@@ -36,16 +26,10 @@ class _CartCountState extends State<CartCount> {
             child: Row(
               children: [
                 CountButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (count > 0) {
                       count--;
-
-                      await BlocProvider.of<CartCubit>(context)
-                          .updateCartProducts(
-                              count: count,
-                              productId: widget.cartProductModel.id);
-                      await BlocProvider.of<CartCubit>(context)
-                          .getCartProducts();
+                      BlocProvider.of<CartCubit>(context).cartCount = count;
                     }
                     setState(() {});
                   },
@@ -64,14 +48,10 @@ class _CartCountState extends State<CartCount> {
                   )),
                 ),
                 CountButton(
-                  onPressed: () async {
+                  onPressed: () {
                     setState(() {});
                     count++;
-                    await BlocProvider.of<CartCubit>(context)
-                        .updateCartProducts(
-                            count: count,
-                            productId: widget.cartProductModel.id);
-                    await BlocProvider.of<CartCubit>(context).getCartProducts();
+                    BlocProvider.of<CartCubit>(context).cartCount = count;
                   },
                   icon: Icons.add,
                 ),

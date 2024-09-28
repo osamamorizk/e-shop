@@ -9,6 +9,9 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   CartCubit(this.cartRepo) : super(CartInitial());
   List<CartProductModel> productsList = [];
+  List<String> productsIds = [];
+
+  int cartCount = 0;
   final CartRepo cartRepo;
   Future<void> addProductCart({
     required String title,
@@ -18,16 +21,19 @@ class CartCubit extends Cubit<CartState> {
     required num price,
     required int id,
     required String category,
+    required int count,
   }) async {
     emit(CartAddLoading());
     var result = await cartRepo.addToCart(
-        title: title,
-        description: description,
-        rate: rate,
-        image: image,
-        price: price,
-        id: id,
-        category: category);
+      title: title,
+      description: description,
+      rate: rate,
+      image: image,
+      price: price,
+      id: id,
+      category: category,
+      count: count,
+    );
     result.fold(
       (failure) {
         emit(
@@ -55,6 +61,16 @@ class CartCubit extends Cubit<CartState> {
         productsList = product;
         emit(GetCartSuccess(products: product));
       },
+    );
+  }
+
+  Future<void> updateCartProducts({
+    required int count,
+    required int productId,
+  }) async {
+    await cartRepo.updateProduct(
+      count: count,
+      productId: productId,
     );
   }
 }

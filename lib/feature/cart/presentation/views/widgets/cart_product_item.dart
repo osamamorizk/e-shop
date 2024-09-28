@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/price_count.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/title_delet.dart';
 
 class CartProductItem extends StatelessWidget {
   const CartProductItem({
     super.key,
+    required this.cartProductModel,
   });
+  final CartProductModel cartProductModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +27,21 @@ class CartProductItem extends StatelessWidget {
               width: 75,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.asset('assets/images/test.jpg')),
+                  child: Image.network(cartProductModel.image)),
             ),
-            const SizedBox(
+            SizedBox(
               width: 240,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [TitleAndDelet(), PriceAndCount()],
+                children: [
+                  TitleAndDelet(
+                    title: cartProductModel.title,
+                  ),
+                  PriceAndCount(
+                    cartProductModel: cartProductModel,
+                  ),
+                ],
               ),
             ),
           ],

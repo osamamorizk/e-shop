@@ -4,8 +4,9 @@ import 'package:shop_app/core/helpers/consts.dart';
 class TitleAndDelet extends StatelessWidget {
   const TitleAndDelet({
     super.key,
+    required this.title,
   });
-
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,13 +14,13 @@ class TitleAndDelet extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(
+          SizedBox(
             width: 140,
             child: Text(
-              "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+              title,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
           ),
           CircleAvatar(

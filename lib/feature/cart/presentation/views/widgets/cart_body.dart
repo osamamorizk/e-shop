@@ -9,7 +9,8 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CartCubit>(context).getCartProducts();
+    var cartCubit = BlocProvider.of<CartCubit>(context);
+    cartCubit.getCartProducts();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,13 +22,17 @@ class CartBody extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: state.products.length,
                     itemBuilder: (context, index) {
-                      return const CartProductItem();
+                      return CartProductItem(
+                        cartProductModel: state.products[index],
+                      );
                     }),
               );
             } else if (state is GetCartFailure) {
               return Text(state.errorMessage);
             } else {
-              return const CircularProgressIndicator();
+              return SizedBox(
+                  height: (MediaQuery.of(context).size.height) - 365,
+                  child: const Center(child: CircularProgressIndicator()));
             }
           },
         ),
@@ -39,12 +44,12 @@ class CartBody extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        const OrderInfo(
-          info: '5000 ',
+        OrderInfo(
+          info: r'$' '${500} ',
           title: 'Total price',
         ),
-        const OrderInfo(
-          info: '5',
+        OrderInfo(
+          info: '${cartCubit.productsList.length}',
           title: "Order's Number",
         ),
         const Padding(
@@ -79,7 +84,7 @@ class OrderInfo extends StatelessWidget {
         style: const TextStyle(fontSize: 22),
       ),
       trailing: Text(
-        r'$' '$info',
+        info,
         style: const TextStyle(fontSize: 20),
       ),
     );
