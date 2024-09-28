@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
 import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
@@ -65,6 +66,16 @@ class CartBody extends StatelessWidget {
                       width: 210,
                       height: 55,
                       child: CustomButton(
+                          onTap: () {
+                            Fluttertoast.showToast(
+                                msg: "Payment will active soon",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 18.0);
+                          },
                           text:
                               'Checkout    (${numOfOrders(cartCubit.productsList)})'),
                     ),

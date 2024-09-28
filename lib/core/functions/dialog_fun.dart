@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-void showAlertDialog(BuildContext context, void Function()? onPressed) {
+void showAlertDialog(BuildContext context, void Function()? onPressed,
+    String action, String warning) {
   Widget cancelButton = TextButton(
     child: const Text(
       "Cancel",
@@ -14,20 +15,20 @@ void showAlertDialog(BuildContext context, void Function()? onPressed) {
   );
   Widget continueButton = TextButton(
     onPressed: onPressed,
-    child: const Text(
-      "Delete",
-      style: TextStyle(color: Colors.red, fontSize: 18),
+    child: Text(
+      action,
+      style: const TextStyle(color: Colors.red, fontSize: 18),
     ),
   );
 
   AlertDialog alert = AlertDialog(
     title: const Text(
       "Warning",
-      style: TextStyle(fontSize: 30),
+      style: TextStyle(fontSize: 26),
     ),
-    content: const Text(
-      "Would you like to delete product?",
-      style: TextStyle(color: Colors.black, fontSize: 18),
+    content: Text(
+      warning,
+      style: const TextStyle(color: Colors.black, fontSize: 18),
     ),
     actions: [
       cancelButton,

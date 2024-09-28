@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
-import 'package:shop_app/feature/cart/presentation/views/widgets/dialog_fun.dart';
+import 'package:shop_app/core/functions/dialog_fun.dart';
 
 class TitleAndDelet extends StatelessWidget {
   const TitleAndDelet({
@@ -40,15 +40,11 @@ class TitleAndDelet extends StatelessWidget {
                 backgroundColor: kPrimaryColor.withOpacity(.07),
                 child: IconButton(
                     onPressed: () {
-                      showAlertDialog(
-                        context,
-                        () async {
-                          GoRouter.of(context).pop();
-                          await BlocProvider.of<CartCubit>(context)
-                              .deleteCartProduct(
-                                  productId: cartProductModel.id);
-                        },
-                      );
+                      showAlertDialog(context, () async {
+                        GoRouter.of(context).pop();
+                        await BlocProvider.of<CartCubit>(context)
+                            .deleteCartProduct(productId: cartProductModel.id);
+                      }, "Delete", "Would you like to delete this product?");
                     },
                     icon: const Icon(
                       Icons.delete,

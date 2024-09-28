@@ -32,8 +32,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         key: formKey,
         child: ListView(
           children: [
-            const SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               "Create an account",
               style: Styles.styleBold30,
             ),
@@ -131,7 +131,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSucess) {
-                  GoRouter.of(context).push(Routes.homeView);
+                  GoRouter.of(context).go(Routes.homeView);
                   Fluttertoast.showToast(
                       msg: "Register Successfuly",
                       toastLength: Toast.LENGTH_SHORT,
@@ -183,7 +183,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               onPressed: () {
                 GoRouter.of(context).pop();
               },
-            )
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -8,6 +8,8 @@ import 'package:shop_app/feature/home/data/repos/home_repo_impl.dart';
 import 'package:shop_app/feature/home/presentation/manger/all_products/all_product_cubit.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_cubit/category_cubit.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_product/category_product_cubit_cubit.dart';
+import 'package:shop_app/feature/profile/data/repos/profile_repo_impl.dart';
+import 'package:shop_app/feature/profile/presentation/manger/cubit/profile_cubit.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -38,6 +40,9 @@ class _BottomBarState extends State<BottomBar> {
         BlocProvider<CartCubit>(
           create: (BuildContext context) => CartCubit(CartRepoImpl()),
         ),
+        BlocProvider<ProfileCubit>(
+          create: (BuildContext context) => ProfileCubit(ProfileRepoImpl()),
+        ),
       ],
       child: Scaffold(
         bottomNavigationBar: Container(
@@ -52,8 +57,9 @@ class _BottomBarState extends State<BottomBar> {
                 highlightColor: Colors.transparent,
               ),
               child: BottomNavigationBar(
+                iconSize: 20,
                 backgroundColor: Colors.black,
-                selectedIconTheme: const IconThemeData(size: 24),
+                selectedIconTheme: const IconThemeData(size: 22),
                 elevation: 10,
                 currentIndex: currentIndex,
                 selectedLabelStyle: const TextStyle(color: Colors.white),

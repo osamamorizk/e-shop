@@ -32,8 +32,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         key: formKey,
         child: ListView(
           children: [
-            const SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 40),
+            const Text(
               "Login to your account",
               style: Styles.styleBold30,
             ),
@@ -83,7 +83,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
-                  GoRouter.of(context).push(Routes.homeView);
+                  GoRouter.of(context).go(Routes.homeView);
                   Fluttertoast.showToast(
                       msg: "Login Successfuly",
                       toastLength: Toast.LENGTH_SHORT,
