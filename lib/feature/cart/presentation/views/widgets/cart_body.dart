@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
+import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/cart_product_item.dart';
+import 'package:shop_app/feature/cart/presentation/views/widgets/order_info.dart';
 
 class CartBody extends StatelessWidget {
   const CartBody({super.key});
@@ -44,49 +46,51 @@ class CartBody extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        const OrderInfo(
-          info: r'$' '${500} ',
-          title: 'Total price',
+        BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                OrderInfo(
+                  info: r'$ ' '${getPrice(cartCubit.productsList).toInt()} ',
+                  title: 'Total price',
+                ),
+                OrderInfo(
+                  info: '${numOfOrders(cartCubit.productsList)}',
+                  title: "Order's Number",
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                    child: SizedBox(
+                      width: 210,
+                      height: 55,
+                      child: CustomButton(
+                          text:
+                              'Checkout    (${numOfOrders(cartCubit.productsList)})'),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
         ),
-        OrderInfo(
-          info: '${cartCubit.productsList.length}',
-          title: "Order's Number",
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Center(
-            child: SizedBox(
-              width: 200,
-              height: 55,
-              child: CustomButton(text: 'Checkout'),
-            ),
-          ),
-        )
       ],
     );
   }
 }
 
-class OrderInfo extends StatelessWidget {
-  const OrderInfo({
-    super.key,
-    required this.title,
-    required this.info,
-  });
-  final String title;
-  final String info;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(
-        title,
-        style: const TextStyle(fontSize: 22),
-      ),
-      trailing: Text(
-        info,
-        style: const TextStyle(fontSize: 20),
-      ),
-    );
+num getPrice(List<CartProductModel> products) {
+  num price = 0;
+  for (var product in products) {
+    price = price + product.price * product.count;
   }
+  return price;
+}
+
+int numOfOrders(List<CartProductModel> products) {
+  int orders = 0;
+  for (var product in products) {
+    orders = orders + product.count;
+  }
+  return orders;
 }

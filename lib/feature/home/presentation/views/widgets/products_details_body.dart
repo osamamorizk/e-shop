@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
-import 'package:shop_app/feature/cart/presentation/views/widgets/cart_body.dart';
+import 'package:shop_app/feature/cart/presentation/views/widgets/order_info.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/add_to_cart_button.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_count.dart';
@@ -86,6 +86,8 @@ class AddCartAndCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cartCubit = BlocProvider.of<CartCubit>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -96,7 +98,7 @@ class AddCartAndCount extends StatelessWidget {
         ),
         AddCartButton(
           onTap: () async {
-            await BlocProvider.of<CartCubit>(context).addProductCart(
+            await cartCubit.addProductCart(
               title: productModel.title,
               description: productModel.description,
               rate: productModel.rate,
@@ -106,7 +108,18 @@ class AddCartAndCount extends StatelessWidget {
               category: productModel.category,
               count: BlocProvider.of<CartCubit>(context).cartCount,
             );
-          },
+          }
+          // () {
+          //     Fluttertoast.showToast(
+          //         msg: 'Already in cart',
+          //         toastLength: Toast.LENGTH_SHORT,
+          //         gravity: ToastGravity.BOTTOM,
+          //         timeInSecForIosWeb: 1,
+          //         backgroundColor: Colors.red,
+          //         textColor: Colors.white,
+          //         fontSize: 16.0);
+          //   }
+          ,
           productModel: productModel,
         ),
       ],

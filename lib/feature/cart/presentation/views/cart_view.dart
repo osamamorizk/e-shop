@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/cart_body.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/empty_cart.dart';
-import 'package:shop_app/feature/home/presentation/views/widgets/skeletonizer_latest_product.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -33,15 +32,15 @@ class _CartViewState extends State<CartView> {
         ),
         body: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            // if (state is GetCartSuccess) {
-            return BlocProvider.of<CartCubit>(context).productsList.isEmpty
-                ? const EmptyCart()
-                : const CartBody();
-            // } else if (state is GetCartFailure) {
-            //   return Text(state.errorMessage);
-            // } else {
-            //   return const SkeletonizerLatestProduct();
-            // }
+            if (state is GetCartSuccess) {
+              return BlocProvider.of<CartCubit>(context).productsList.isEmpty
+                  ? const EmptyCart()
+                  : const CartBody();
+            } else if (state is GetCartFailure) {
+              return Text(state.errorMessage);
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
           },
         ));
   }

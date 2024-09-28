@@ -22,7 +22,7 @@ class _PriceAndCountState extends State<PriceAndCount> {
       children: [
         Text(
           r'$'
-          '${widget.cartProductModel.price * widget.cartProductModel.count}',
+          '${widget.cartProductModel.price}',
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         CartCount(
