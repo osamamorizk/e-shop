@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:shop_app/core/errors/failure.dart';
+import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 
 abstract class CartRepo {
   Future<Either<Failure, void>> addToCart({
@@ -10,6 +10,7 @@ abstract class CartRepo {
     required String image,
     required num price,
     required int id,
+    required String category,
   });
-  Future<Either<Failure, QuerySnapshot>> getCart();
+  Future<Either<Failure, List<CartProductModel>>> getCart();
 }

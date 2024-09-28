@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
+import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/cart_product_item.dart';
 
 class CartBody extends StatelessWidget {
@@ -7,16 +9,27 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CartCubit>(context).getCartProducts();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: (MediaQuery.of(context).size.height) - 365,
-          child: ListView.builder(
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return const CartProductItem();
-              }),
+        BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            if (state is GetCartSuccess) {
+              return SizedBox(
+                height: (MediaQuery.of(context).size.height) - 365,
+                child: ListView.builder(
+                    itemCount: state.products.length,
+                    itemBuilder: (context, index) {
+                      return const CartProductItem();
+                    }),
+              );
+            } else if (state is GetCartFailure) {
+              return Text(state.errorMessage);
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
         ),
         const SizedBox(height: 5),
         const Padding(

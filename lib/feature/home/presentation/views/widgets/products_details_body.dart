@@ -54,6 +54,16 @@ class ProductDetailsBody extends StatelessWidget {
                       textColor: Colors.white,
                       fontSize: 16.0);
                 }
+                if (state is CartAddFailure) {
+                  Fluttertoast.showToast(
+                      msg: state.errorMessage,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
               },
               child: PriceANdAddCart(
                 onTap: () async {
@@ -64,7 +74,8 @@ class ProductDetailsBody extends StatelessWidget {
                       rate: productModel.rate,
                       image: productModel.image,
                       price: productModel.price,
-                      id: productModel.id);
+                      id: productModel.id,
+                      category: productModel.category);
                 },
                 productModel: productModel,
               ),
