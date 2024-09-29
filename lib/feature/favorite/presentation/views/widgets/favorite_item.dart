@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
 import 'package:shop_app/core/widgets/favorite_item.dart';
+import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/core/widgets/product_count.dart';
 
@@ -10,6 +13,7 @@ class FavoriteItem extends StatelessWidget {
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
+    var cartCubit = BlocProvider.of<CartCubit>(context);
     return GestureDetector(
       onTap: () {
         GoRouter.of(context)
@@ -39,12 +43,40 @@ class FavoriteItem extends StatelessWidget {
                   FavoriteIcon(
                     productModel: productModel,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.add_shopping_cart,
-                      size: 35,
-                    ),
+                  BlocConsumer<CartCubit, CartState>(
+                    listener: (context, state) {
+                      if (state is CartAddSuccess) {
+                        Fluttertoast.showToast(
+                            msg: "Added Successfluy",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 18.0);
+                      }
+                    },
+                    builder: (context, state) {
+                      return IconButton(
+                        onPressed: () async {
+                          await cartCubit.addProductCart(
+                            title: productModel.title,
+                            description: productModel.description,
+                            rate: productModel.rate,
+                            image: productModel.image,
+                            price: productModel.price,
+                            id: productModel.id,
+                            category: productModel.category,
+                            count:
+                                BlocProvider.of<CartCubit>(context).cartCount,
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.add_shopping_cart,
+                          size: 32,
+                        ),
+                      );
+                    },
                   ),
                 ],
               )

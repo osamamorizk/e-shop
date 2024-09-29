@@ -18,7 +18,7 @@ class SkeletonizerLatestProduct extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
-            itemCount: 3,
+            itemCount: 5,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Container(

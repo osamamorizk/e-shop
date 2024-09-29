@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/feature/favorite/presentation/manger/cubit/favorite_cubit.dart';
+import 'package:shop_app/feature/favorite/presentation/views/widgets/favorite_empty.dart';
 import 'package:shop_app/feature/favorite/presentation/views/widgets/favorite_list.dart';
 
 class FavoriteView extends StatefulWidget {
@@ -28,7 +29,23 @@ class _FavoriteViewState extends State<FavoriteView> {
           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
       ),
-      body: const FavoritetList(),
+      body: BlocBuilder<FavoriteCubit, FavoriteState>(
+        builder: (context, state) {
+          if (state is GetFavoriteSuccess) {
+            return BlocProvider.of<FavoriteCubit>(context)
+                    .favoProducts
+                    .isNotEmpty
+                ? const FavoritetList()
+                : const FavoriteEmpty();
+          } else if (state is GetFavoriteFailure) {
+            return Text(state.errorMessage);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

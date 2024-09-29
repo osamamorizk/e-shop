@@ -21,7 +21,7 @@ class CartBody extends StatelessWidget {
           builder: (context, state) {
             if (state is GetCartSuccess) {
               return SizedBox(
-                height: (MediaQuery.of(context).size.height) - 365,
+                height: (MediaQuery.of(context).size.height) - 370,
                 child: ListView.builder(
                     itemCount: state.products.length,
                     itemBuilder: (context, index) {
@@ -80,7 +80,7 @@ class CartBody extends StatelessWidget {
                               'Checkout    (${numOfOrders(cartCubit.productsList)})'),
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
