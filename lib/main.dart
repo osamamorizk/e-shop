@@ -22,6 +22,9 @@ class MarketAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey[100],
+      ),
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
     );

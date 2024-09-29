@@ -5,4 +5,5 @@ abstract class Routes {
   static String registerView = '/register';
   static String productDetailsView = '/productdetials';
   static String cartView = '/cart';
+  static String favoriteView = '/favorite';
 }

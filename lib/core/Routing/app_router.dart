@@ -8,6 +8,7 @@ import 'package:shop_app/feature/authentication/presentation/views/login_view.da
 import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/cart_view.dart';
+import 'package:shop_app/feature/favorite/presentation/views/favorite_view.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/product_details_view.dart';
 import 'package:shop_app/feature/onboarding/presentation/views/onboarding_view.dart';
@@ -48,8 +49,12 @@ class AppRouter {
         path: Routes.cartView,
         builder: (context, state) => BlocProvider(
           create: (context) => CartCubit(CartRepoImpl()),
-          child: CartView(),
+          child: const CartView(),
         ),
+      ),
+      GoRoute(
+        path: Routes.favoriteView,
+        builder: (context, state) => const FavoriteView(),
       ),
     ],
   );

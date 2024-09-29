@@ -14,14 +14,15 @@ class ProfileElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.black.withOpacity(.2))),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            // border: Border.all(color: Colors.black.withOpacity(.2)),
+          ),
           height: 90,
           width: MediaQuery.of(context).size.width,
           child: Center(

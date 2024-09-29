@@ -7,7 +7,6 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(.01),
       appBar: AppBar(
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
