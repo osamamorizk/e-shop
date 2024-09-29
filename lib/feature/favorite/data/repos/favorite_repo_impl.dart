@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:shop_app/core/errors/failure.dart';
 import 'package:shop_app/feature/favorite/data/repos/favorite_repo.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
@@ -64,6 +65,27 @@ class FavoriteRepoImpl implements FavoriteRepo {
       }
     } else {
       return left(Failure(errorMessage: 'No user loged'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deletFavoriteProduct(
+      {required int productId}) async {
+    {
+      String uid = user!.uid;
+      final productRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('favoProducts')
+          .doc(productId.toString());
+
+      try {
+        await productRef.delete();
+        return right(null);
+      } catch (e) {
+        Text(e.toString());
+        return left(Failure(errorMessage: e.toString()));
+      }
     }
   }
 }

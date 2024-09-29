@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
-import 'package:shop_app/core/widgets/favorite_item.dart';
+import 'package:shop_app/core/widgets/favorite_icon.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/category_product_name_price.dart';
 

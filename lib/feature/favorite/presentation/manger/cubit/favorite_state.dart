@@ -15,6 +15,16 @@ final class AddToFavoriteFailure extends FavoriteState {
   AddToFavoriteFailure({required this.errorMessage});
 }
 
+final class DeleteFavoriteLoading extends FavoriteState {}
+
+final class DeleteFavoriteSuccess extends FavoriteState {}
+
+final class DeleteFavoriteFailure extends FavoriteState {
+  final String errorMessage;
+
+  DeleteFavoriteFailure({required this.errorMessage});
+}
+
 final class GetFavoriteLoading extends FavoriteState {}
 
 final class GetFavoriteSuccess extends FavoriteState {

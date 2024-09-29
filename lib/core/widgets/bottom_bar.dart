@@ -46,7 +46,8 @@ class _BottomBarState extends State<BottomBar> {
           create: (BuildContext context) => ProfileCubit(ProfileRepoImpl()),
         ),
         BlocProvider<FavoriteCubit>(
-          create: (BuildContext context) => FavoriteCubit(FavoriteRepoImpl()),
+          create: (BuildContext context) =>
+              FavoriteCubit(FavoriteRepoImpl())..getFavoProducts(),
         ),
       ],
       child: Scaffold(

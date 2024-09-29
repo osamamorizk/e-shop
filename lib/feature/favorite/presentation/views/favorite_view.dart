@@ -14,7 +14,7 @@ class FavoriteView extends StatefulWidget {
 class _FavoriteViewState extends State<FavoriteView> {
   @override
   void initState() {
-    BlocProvider.of<FavoriteCubit>(context).getCartProducts();
+    BlocProvider.of<FavoriteCubit>(context).getFavoProducts();
     super.initState();
   }
 

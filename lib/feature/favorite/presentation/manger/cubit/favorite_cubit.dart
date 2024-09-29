@@ -9,6 +9,14 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   FavoriteCubit(this.favoriteRepo) : super(FavoriteInitial());
   final FavoriteRepo favoriteRepo;
   List<ProductModel> favoProducts = [];
+  bool isFavorite({required ProductModel productModel}) {
+    for (var element in favoProducts) {
+      if (element.id == productModel.id) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   Future<void> addToFav({ProductModel? productModel}) async {
     emit(AddToFavoriteLoading());
@@ -23,7 +31,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     );
   }
 
-  Future<void> getCartProducts() async {
+  Future<void> getFavoProducts() async {
     emit(GetFavoriteLoading());
     var result = await favoriteRepo.getFavorite();
 
@@ -36,6 +44,22 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       (favo) {
         favoProducts = favo;
         emit(GetFavoriteSuccess(favoProducts: favo));
+      },
+    );
+  }
+
+  Future<void> deleteCartProduct({
+    required int productId,
+  }) async {
+    var result = await favoriteRepo.deletFavoriteProduct(
+      productId: productId,
+    );
+    result.fold(
+      (failure) {
+        emit(DeleteFavoriteFailure(errorMessage: failure.errorMessage));
+      },
+      (delete) {
+        emit(DeleteFavoriteSuccess());
       },
     );
   }
