@@ -27,4 +27,15 @@ class ProductModel {
       rate: json['rating']['rate'],
     );
   }
+  factory ProductModel.fromFavo(json) {
+    return ProductModel(
+      title: json['title'],
+      id: json['id'],
+      price: json['price'],
+      description: json['description'],
+      category: json['category'],
+      image: json['image'],
+      rate: 1,
+    );
+  }
 }

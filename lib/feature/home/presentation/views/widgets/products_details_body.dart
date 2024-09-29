@@ -5,7 +5,7 @@ import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart'
 import 'package:shop_app/feature/cart/presentation/views/widgets/order_info.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/add_to_cart_button.dart';
-import 'package:shop_app/feature/home/presentation/views/widgets/product_count.dart';
+import 'package:shop_app/core/widgets/product_count.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_image_stack.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_rate.dart';
 

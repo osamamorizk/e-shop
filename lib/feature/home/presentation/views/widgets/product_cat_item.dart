@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
-import 'package:shop_app/core/helpers/consts.dart';
+import 'package:shop_app/core/widgets/favorite_item.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/category_product_name_price.dart';
 
@@ -33,14 +32,11 @@ class ProductCatItem extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 10,
-            bottom: 2,
-            child: CircleAvatar(
-                backgroundColor: kPrimaryColor.withOpacity(.07),
-                child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(FontAwesomeIcons.heart))),
-          )
+              right: 10,
+              bottom: 2,
+              child: FavoriteIcon(
+                productModel: productModel,
+              ))
         ],
       ),
     );

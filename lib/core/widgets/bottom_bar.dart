@@ -4,6 +4,8 @@ import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/core/helpers/service_locator.dart';
 import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
 import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/favorite/data/repos/favorite_repo_impl.dart';
+import 'package:shop_app/feature/favorite/presentation/manger/cubit/favorite_cubit.dart';
 import 'package:shop_app/feature/home/data/repos/home_repo_impl.dart';
 import 'package:shop_app/feature/home/presentation/manger/all_products/all_product_cubit.dart';
 import 'package:shop_app/feature/home/presentation/manger/category_cubit/category_cubit.dart';
@@ -42,6 +44,9 @@ class _BottomBarState extends State<BottomBar> {
         ),
         BlocProvider<ProfileCubit>(
           create: (BuildContext context) => ProfileCubit(ProfileRepoImpl()),
+        ),
+        BlocProvider<FavoriteCubit>(
+          create: (BuildContext context) => FavoriteCubit(FavoriteRepoImpl()),
         ),
       ],
       child: Scaffold(

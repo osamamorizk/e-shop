@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/Routing/routes.dart';
-import 'package:shop_app/core/helpers/consts.dart';
+import 'package:shop_app/core/widgets/favorite_item.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class LatestProductItem extends StatelessWidget {
@@ -54,10 +53,8 @@ class LatestProductItem extends StatelessWidget {
                   ],
                 ),
               ),
-              CircleAvatar(
-                backgroundColor: kPrimaryColor.withOpacity(.07),
-                child: IconButton(
-                    onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart)),
+              FavoriteIcon(
+                productModel: productModel,
               )
             ],
           ),

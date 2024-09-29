@@ -20,9 +20,9 @@ class _ProductCountState extends State<ProductCount> {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 0),
           child: SizedBox(
-            width: 150,
+            width: 110,
             child: Row(
               children: [
                 CountButton(
