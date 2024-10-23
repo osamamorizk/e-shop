@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/cart_product_item.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/order_info.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class CartBody extends StatelessWidget {
   const CartBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var cartCubit = BlocProvider.of<CartCubit>(context);
+    var localCartCubit = BlocProvider.of<LocalCartCubit>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BlocBuilder<CartCubit, CartState>(
+        BlocBuilder<LocalCartCubit, LocalCartState>(
           builder: (context, state) {
-            if (state is GetCartSuccess) {
+            if (state is GetLocalCartSuccess) {
               return SizedBox(
                 height: (MediaQuery.of(context).size.height) - 370,
                 child: ListView.builder(
@@ -30,7 +30,7 @@ class CartBody extends StatelessWidget {
                       );
                     }),
               );
-            } else if (state is GetCartFailure) {
+            } else if (state is GetLocalCartFailure) {
               return Text(state.errorMessage);
             } else {
               return SizedBox(
@@ -47,16 +47,17 @@ class CartBody extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
         ),
-        BlocBuilder<CartCubit, CartState>(
+        BlocBuilder<LocalCartCubit, LocalCartState>(
           builder: (context, state) {
             return Column(
               children: [
                 OrderInfo(
-                  info: r'$ ' '${getPrice(cartCubit.productsList).toInt()} ',
+                  info:
+                      r'$ ' '${getPrice(localCartCubit.productsList).toInt()} ',
                   title: 'Total price',
                 ),
                 OrderInfo(
-                  info: '${numOfOrders(cartCubit.productsList)}',
+                  info: '${numOfOrders(localCartCubit.productsList)}',
                   title: "Order's Number",
                 ),
                 Padding(
@@ -64,7 +65,7 @@ class CartBody extends StatelessWidget {
                   child: Center(
                     child: SizedBox(
                       width: 210,
-                      height: 55,
+                      height: 50,
                       child: CustomButton(
                           onTap: () {
                             Fluttertoast.showToast(
@@ -77,7 +78,7 @@ class CartBody extends StatelessWidget {
                                 fontSize: 18.0);
                           },
                           text:
-                              'Checkout    (${numOfOrders(cartCubit.productsList)})'),
+                              'Checkout    (${numOfOrders(localCartCubit.productsList)})'),
                     ),
                   ),
                 ),
@@ -90,7 +91,7 @@ class CartBody extends StatelessWidget {
   }
 }
 
-num getPrice(List<CartProductModel> products) {
+num getPrice(List<ProductModel> products) {
   num price = 0;
   for (var product in products) {
     price = price + product.price * product.count;
@@ -98,7 +99,7 @@ num getPrice(List<CartProductModel> products) {
   return price;
 }
 
-int numOfOrders(List<CartProductModel> products) {
+int numOfOrders(List<ProductModel> products) {
   int orders = 0;
   for (var product in products) {
     orders = orders + product.count;

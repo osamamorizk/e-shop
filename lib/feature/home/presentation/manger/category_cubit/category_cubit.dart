@@ -7,7 +7,7 @@ part 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit(this.homeRepo) : super(CategoryInitial());
-
+  int currentIndex = 0;
   final HomeRepo homeRepo;
   Future<void> featchCategory() async {
     emit(LoadingCategory());

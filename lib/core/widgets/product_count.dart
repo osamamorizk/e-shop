@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/count_button.dart';
 
 class ProductCount extends StatefulWidget {
@@ -14,10 +14,10 @@ class ProductCount extends StatefulWidget {
 
 class _ProductCountState extends State<ProductCount> {
   int count = 1;
-  @override
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
+    return BlocBuilder<LocalCartCubit, LocalCartState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -27,9 +27,10 @@ class _ProductCountState extends State<ProductCount> {
               children: [
                 CountButton(
                   onPressed: () {
-                    if (count > 0) {
+                    if (count > 1) {
                       count--;
-                      BlocProvider.of<CartCubit>(context).cartCount = count;
+                      BlocProvider.of<LocalCartCubit>(context).productCount =
+                          count;
                     }
                     setState(() {});
                   },
@@ -51,7 +52,8 @@ class _ProductCountState extends State<ProductCount> {
                   onPressed: () {
                     setState(() {});
                     count++;
-                    BlocProvider.of<CartCubit>(context).cartCount = count;
+                    BlocProvider.of<LocalCartCubit>(context).productCount =
+                        count;
                   },
                   icon: Icons.add,
                 ),

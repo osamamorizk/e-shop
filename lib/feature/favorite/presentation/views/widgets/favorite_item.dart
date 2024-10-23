@@ -3,16 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:shop_app/core/widgets/favorite_icon.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/fire_cart/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
+import 'package:shop_app/feature/favorite/presentation/views/widgets/count_price.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
-import 'package:shop_app/core/widgets/product_count.dart';
 
 class FavoriteItem extends StatelessWidget {
-  const FavoriteItem({super.key, required this.productModel});
+  const FavoriteItem({
+    super.key,
+    required this.productModel,
+  });
   final ProductModel productModel;
+
   @override
   Widget build(BuildContext context) {
-    var cartCubit = BlocProvider.of<CartCubit>(context);
+    var localCartCubit = BlocProvider.of<LocalCartCubit>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
@@ -37,9 +42,9 @@ class FavoriteItem extends StatelessWidget {
                 FavoriteIcon(
                   productModel: productModel,
                 ),
-                BlocConsumer<CartCubit, CartState>(
+                BlocConsumer<LocalCartCubit, LocalCartState>(
                   listener: (context, state) {
-                    if (state is CartAddSuccess) {
+                    if (state is LocalCartSuccess) {
                       Fluttertoast.showToast(
                           msg: "Added Successfluy",
                           toastLength: Toast.LENGTH_SHORT,
@@ -48,21 +53,22 @@ class FavoriteItem extends StatelessWidget {
                           backgroundColor: Colors.green,
                           textColor: Colors.white,
                           fontSize: 18.0);
+                    } else if (state is LocalCartFailure) {
+                      Fluttertoast.showToast(
+                          msg: state.errorMessage,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 18.0);
                     }
                   },
                   builder: (context, state) {
                     return IconButton(
                       onPressed: () async {
-                        await cartCubit.addProductCart(
-                          title: productModel.title,
-                          description: productModel.description,
-                          rate: productModel.rate,
-                          image: productModel.image,
-                          price: productModel.price,
-                          id: productModel.id,
-                          category: productModel.category,
-                          count: BlocProvider.of<CartCubit>(context).cartCount,
-                        );
+                        await localCartCubit.addProductCart(context,
+                            productModel: productModel);
                       },
                       icon: const Icon(
                         Icons.add_shopping_cart,
@@ -75,49 +81,6 @@ class FavoriteItem extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CountAndPrice extends StatelessWidget {
-  const CountAndPrice({
-    super.key,
-    required this.productModel,
-  });
-
-  final ProductModel productModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 180,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            productModel.title,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            width: 180,
-            child: Row(
-              children: [
-                Text(
-                  r'$' '${productModel.price}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                const Spacer(),
-                const ProductCount()
-              ],
-            ),
-          )
-        ],
       ),
     );
   }

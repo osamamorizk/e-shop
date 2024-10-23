@@ -5,6 +5,7 @@ import 'package:shop_app/feature/favorite/presentation/views/favorite_view.dart'
 import 'package:shop_app/feature/home/presentation/views/home_view.dart';
 import 'package:shop_app/feature/profile/presentation/views/profile_view.dart';
 
+const cartBox = 'cart4';
 Color kPrimaryColor = const Color(0xff21D4B4);
 bool onboard = false;
 

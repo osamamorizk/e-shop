@@ -22,7 +22,9 @@ class FavoritetList extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0),
               child: GestureDetector(
                   onTap: () {},
-                  child: FavoriteItem(productModel: state.favoProducts[index])),
+                  child: FavoriteItem(
+                    productModel: state.favoProducts[index],
+                  )),
             ),
           );
         } else if (state is GetFavoriteFailure) {

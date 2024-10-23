@@ -17,6 +17,7 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
+    currentIndex = BlocProvider.of<CategoryCubit>(context).currentIndex;
     return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is SuccessCategory) {
@@ -33,6 +34,8 @@ class _CategoryListState extends State<CategoryList> {
                       onTap: () async {
                         setState(() {
                           currentIndex = index;
+                          BlocProvider.of<CategoryCubit>(context).currentIndex =
+                              index;
                         });
                         await BlocProvider.of<CategoryProductCubit>(context)
                             .featchCatProducts(

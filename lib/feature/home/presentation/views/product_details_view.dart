@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/fire_cart/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/products_details_body.dart';
 
@@ -21,7 +22,7 @@ class ProductDetailsView extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => CartCubit(CartRepoImpl()),
+        create: (context) => LocalCartCubit(CartRepoImpl()),
         child: ProductDetailsBody(
           productModel: productModel,
         ),

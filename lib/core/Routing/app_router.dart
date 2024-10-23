@@ -6,7 +6,7 @@ import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/core/widgets/bottom_bar.dart';
 import 'package:shop_app/feature/authentication/presentation/views/login_view.dart';
 import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/cart_view.dart';
 import 'package:shop_app/feature/favorite/presentation/views/favorite_view.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
@@ -48,7 +48,7 @@ class AppRouter {
       GoRoute(
         path: Routes.cartView,
         builder: (context, state) => BlocProvider(
-          create: (context) => CartCubit(CartRepoImpl()),
+          create: (context) => LocalCartCubit(CartRepoImpl()),
           child: const CartView(),
         ),
       ),

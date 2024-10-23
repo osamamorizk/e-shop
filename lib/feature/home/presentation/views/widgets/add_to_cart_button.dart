@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/widgets/custom_button.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class AddCartButton extends StatelessWidget {
@@ -22,12 +22,12 @@ class AddCartButton extends StatelessWidget {
         SizedBox(
           width: 150,
           height: 55,
-          child: BlocBuilder<CartCubit, CartState>(
+          child: BlocBuilder<LocalCartCubit, LocalCartState>(
             builder: (context, state) {
               return ConditionalBuilder(
                   fallback: (context) =>
                       const Center(child: CircularProgressIndicator()),
-                  condition: state is! CartAddLoading,
+                  condition: state is! LocalCartLoading,
                   builder: (context) =>
                       CustomButton(onTap: onTap, text: 'Add to cart'));
             },

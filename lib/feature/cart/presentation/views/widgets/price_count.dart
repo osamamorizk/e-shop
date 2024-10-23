@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/cart_count.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class PriceAndCount extends StatefulWidget {
   const PriceAndCount({
@@ -8,7 +8,7 @@ class PriceAndCount extends StatefulWidget {
     required this.cartProductModel,
   });
 
-  final CartProductModel cartProductModel;
+  final ProductModel cartProductModel;
 
   @override
   State<PriceAndCount> createState() => _PriceAndCountState();

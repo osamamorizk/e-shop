@@ -14,12 +14,12 @@ class CategryProductNamePrice extends StatelessWidget {
       children: [
         const SizedBox(height: 5),
         SizedBox(
-          width: 150,
+          width: 170,
           height: 155,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-            child: Image.network(fit: BoxFit.fill, productModel.image),
+            child: Image.network(fit: BoxFit.scaleDown, productModel.image),
           ),
         ),
         Padding(

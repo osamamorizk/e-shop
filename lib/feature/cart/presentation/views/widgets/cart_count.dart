@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/count_button.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class CartCount extends StatefulWidget {
   const CartCount({
@@ -11,7 +12,7 @@ class CartCount extends StatefulWidget {
     required this.cartProductModel,
   });
   final int count;
-  final CartProductModel cartProductModel;
+  final ProductModel cartProductModel;
 
   @override
   State<CartCount> createState() => _CartCountState();
@@ -27,7 +28,7 @@ class _CartCountState extends State<CartCount> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
+    return BlocBuilder<LocalCartCubit, LocalCartState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -40,10 +41,20 @@ class _CartCountState extends State<CartCount> {
                     if (count > 1) {
                       count--;
                       setState(() {});
-                      await BlocProvider.of<CartCubit>(context)
-                          .updateCartProducts(
-                              count: count,
-                              productId: widget.cartProductModel.id);
+                      // await BlocProvider.of<CartCubit>(context)
+                      //     .updateCartProducts(
+                      //         count: count,
+                      //         productId: widget.cartProductModel.id);
+                      // await BlocProvider.of<LocalCartCubit>(context)
+                      //     .addProductCart(context,
+                      //         productModel: widget.cartProductModel);
+                      // await BlocProvider.of<LocalCartCubit>(context)
+                      //     .getCartProducts();
+                      await BlocProvider.of<LocalCartCubit>(context)
+                          .updateCartCount(
+                              context: context,
+                              productModel: widget.cartProductModel,
+                              increment: false);
                     }
                   },
                   icon: Icons.remove,
@@ -64,10 +75,17 @@ class _CartCountState extends State<CartCount> {
                   onPressed: () async {
                     setState(() {});
                     count++;
-                    await BlocProvider.of<CartCubit>(context)
-                        .updateCartProducts(
-                            count: count,
-                            productId: widget.cartProductModel.id);
+                    await BlocProvider.of<LocalCartCubit>(context)
+                        .updateCartCount(
+                            context: context,
+                            productModel: widget.cartProductModel,
+                            increment: true);
+
+                    // await BlocProvider.of<LocalCartCubit>(context)
+                    //     .addProductCart(context,
+                    //         productModel: widget.cartProductModel);
+                    // await BlocProvider.of<LocalCartCubit>(context)
+                    //     .getCartProducts();
                   },
                   icon: Icons.add,
                 ),

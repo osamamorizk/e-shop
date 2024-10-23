@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/order_info.dart';
 import 'package:shop_app/feature/home/data/models/product_model.dart';
+import 'package:shop_app/feature/home/presentation/views/widgets/add_cart_count.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/add_to_cart_button.dart';
 import 'package:shop_app/core/widgets/product_count.dart';
 import 'package:shop_app/feature/home/presentation/views/widgets/product_image_stack.dart';
@@ -43,9 +44,9 @@ class ProductDetailsBody extends StatelessWidget {
             const Divider(),
             OrderInfo(title: 'Price', info: r'$ ' '${productModel.price}'),
             const SizedBox(height: 15),
-            BlocListener<CartCubit, CartState>(
+            BlocListener<LocalCartCubit, LocalCartState>(
               listener: (context, state) {
-                if (state is CartAddSuccess) {
+                if (state is LocalCartSuccess) {
                   Fluttertoast.showToast(
                       msg: "Successfuly Add",
                       toastLength: Toast.LENGTH_SHORT,
@@ -55,7 +56,7 @@ class ProductDetailsBody extends StatelessWidget {
                       textColor: Colors.white,
                       fontSize: 16.0);
                 }
-                if (state is CartAddFailure) {
+                if (state is LocalCartFailure) {
                   Fluttertoast.showToast(
                       msg: state.errorMessage,
                       toastLength: Toast.LENGTH_SHORT,
@@ -72,57 +73,6 @@ class ProductDetailsBody extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class AddCartAndCount extends StatelessWidget {
-  const AddCartAndCount({
-    super.key,
-    required this.productModel,
-  });
-
-  final ProductModel productModel;
-
-  @override
-  Widget build(BuildContext context) {
-    var cartCubit = BlocProvider.of<CartCubit>(context);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const SizedBox(
-          height: 60,
-          width: 170,
-          child: ProductCount(),
-        ),
-        AddCartButton(
-          onTap: () async {
-            await cartCubit.addProductCart(
-              title: productModel.title,
-              description: productModel.description,
-              rate: productModel.rate,
-              image: productModel.image,
-              price: productModel.price,
-              id: productModel.id,
-              category: productModel.category,
-              count: BlocProvider.of<CartCubit>(context).cartCount,
-            );
-          }
-          // () {
-          //     Fluttertoast.showToast(
-          //         msg: 'Already in cart',
-          //         toastLength: Toast.LENGTH_SHORT,
-          //         gravity: ToastGravity.BOTTOM,
-          //         timeInSecForIosWeb: 1,
-          //         backgroundColor: Colors.red,
-          //         textColor: Colors.white,
-          //         fontSize: 16.0);
-          //   }
-          ,
-          productModel: productModel,
-        ),
-      ],
     );
   }
 }

@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/helpers/consts.dart';
 import 'package:shop_app/core/helpers/service_locator.dart';
 import 'package:shop_app/feature/cart/data/repos/cart_repo_impl.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/fire_cart/cart_cubit.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
 import 'package:shop_app/feature/favorite/data/repos/favorite_repo_impl.dart';
 import 'package:shop_app/feature/favorite/presentation/manger/cubit/favorite_cubit.dart';
 import 'package:shop_app/feature/home/data/repos/home_repo_impl.dart';
@@ -39,9 +40,9 @@ class _BottomBarState extends State<BottomBar> {
               CategoryProductCubit(getIt.get<HomeRepoImpl>())
                 ..featchCatProducts(categryName: 'electronics'),
         ),
-        BlocProvider<CartCubit>(
-          create: (BuildContext context) => CartCubit(CartRepoImpl()),
-        ),
+        // BlocProvider<CartCubit>(
+        //   create: (BuildContext context) => CartCubit(CartRepoImpl()),
+        // ),
         BlocProvider<ProfileCubit>(
           create: (BuildContext context) => ProfileCubit(ProfileRepoImpl()),
         ),
@@ -49,6 +50,9 @@ class _BottomBarState extends State<BottomBar> {
           create: (BuildContext context) =>
               FavoriteCubit(FavoriteRepoImpl())..getFavoProducts(),
         ),
+        BlocProvider<LocalCartCubit>(
+            create: (BuildContext context) =>
+                LocalCartCubit(CartRepoImpl())..getCartProducts()),
       ],
       child: Scaffold(
         bottomNavigationBar: Container(

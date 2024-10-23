@@ -18,7 +18,7 @@ class ProductCatItem extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 170,
+            width: 180,
             decoration: BoxDecoration(
               border: Border.all(width: .1),
               borderRadius: BorderRadius.circular(16),

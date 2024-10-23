@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class Failure {
   final String errorMessage;
@@ -37,6 +38,7 @@ class ServerFailure extends Failure {
             errorMessage: 'Opps There was an Error, Please try again');
     }
   }
+
   factory ServerFailure.fromResponse(int? statusCode, dynamic responce) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailure(errorMessage: responce);
@@ -48,6 +50,25 @@ class ServerFailure extends Failure {
           errorMessage: 'Internal server error, please try again later');
     } else {
       return ServerFailure(errorMessage: 'Oops tray again');
+    }
+  }
+
+  factory ServerFailure.fromHive(HiveError hiveError) {
+    if (hiveError.toString().contains('Box is already open')) {
+      return ServerFailure(errorMessage: 'The data storage is already open.');
+    } else if (hiveError.toString().contains('Box not found')) {
+      return ServerFailure(
+          errorMessage: 'The requested data could not be found.');
+    } else if (hiveError.toString().contains('Write failed')) {
+      return ServerFailure(
+          errorMessage: 'Failed to write data. Please try again.');
+    } else if (hiveError.toString().contains('Read failed')) {
+      return ServerFailure(
+          errorMessage: 'Failed to read data. Please try again.');
+    } else if (hiveError.toString().contains('Key not found')) {
+      return ServerFailure(errorMessage: 'The requested item does not exist.');
+    } else {
+      return ServerFailure(errorMessage: 'Already in cart');
     }
   }
 }

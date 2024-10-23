@@ -26,10 +26,13 @@ class LatestProductItem extends StatelessWidget {
             children: [
               SizedBox(
                 height: 110,
-                width: 100,
+                width: 120,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.network(productModel.image)),
+                    child: Image.network(
+                      fit: BoxFit.scaleDown,
+                      productModel.image,
+                    )),
               ),
               SizedBox(
                 width: 180,

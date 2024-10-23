@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/price_count.dart';
 import 'package:shop_app/feature/cart/presentation/views/widgets/title_delet.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class CartProductItem extends StatelessWidget {
   const CartProductItem({
     super.key,
     required this.cartProductModel,
   });
-  final CartProductModel cartProductModel;
+  final ProductModel cartProductModel;
 
   @override
   Widget build(BuildContext context) {

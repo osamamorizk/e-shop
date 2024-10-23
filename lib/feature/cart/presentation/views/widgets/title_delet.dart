@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:shop_app/core/helpers/consts.dart';
-import 'package:shop_app/feature/cart/data/models/cart_product_model.dart';
-import 'package:shop_app/feature/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:shop_app/core/functions/dialog_fun.dart';
+import 'package:shop_app/feature/cart/presentation/manger/local_cart/local_cart_cubit.dart';
+import 'package:shop_app/feature/home/data/models/product_model.dart';
 
 class TitleAndDelet extends StatelessWidget {
   const TitleAndDelet({
@@ -14,7 +14,7 @@ class TitleAndDelet extends StatelessWidget {
     required this.cartProductModel,
   });
   final String title;
-  final CartProductModel cartProductModel;
+  final ProductModel cartProductModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,28 +31,30 @@ class TitleAndDelet extends StatelessWidget {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
           ),
-          BlocBuilder<CartCubit, CartState>(
-            builder: (context, state) {
-              if (state is DeleteSuccess) {
-                GoRouter.of(context).pop();
-              }
-              return CircleAvatar(
-                backgroundColor: kPrimaryColor.withOpacity(.07),
-                child: IconButton(
-                    onPressed: () {
-                      showAlertDialog(context, () async {
-                        GoRouter.of(context).pop();
-                        await BlocProvider.of<CartCubit>(context)
-                            .deleteCartProduct(productId: cartProductModel.id);
-                      }, "Delete", "Would you like to delete this product?");
+          CircleAvatar(
+            backgroundColor: kPrimaryColor.withOpacity(.07),
+            child: IconButton(
+                onPressed: () {
+                  showAlertDialog(
+                    context,
+                    () async {
+                      await BlocProvider.of<LocalCartCubit>(context)
+                          .deleteCart(productModel: cartProductModel);
+
+                      await BlocProvider.of<LocalCartCubit>(context)
+                          .getCartProducts();
+
+                      GoRouter.of(context).pop();
                     },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    )),
-              );
-            },
-          ),
+                    'Delete',
+                    'Do you want to delete item?',
+                  );
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                )),
+          )
         ],
       ),
     );
